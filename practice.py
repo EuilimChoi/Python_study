@@ -28,3 +28,8 @@ a.remove('a')
 b = a.count(1)
 a.extend([1, 2, 3, 4, 5, 6])
 print(a)
+
+
+dic = {'name': 'limchoi', 'age': 15}
+dic['high'] = 175
+print(dic)
