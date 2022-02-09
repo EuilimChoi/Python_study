@@ -46,28 +46,9 @@ upbit = pyupbit.Upbit(access, secret)
 balances = upbit.get_balances()
 print("autotrade start", balances[0]['currency'])
 
-# 자동매매 시작
-while True:
-    try:
-        now = datetime.datetime.now()
-        start_time = get_start_time("KRW-BTC")
-        end_time = start_time + datetime.timedelta(days=1)
-        for coin in maincoin:
-            if start_time < now < end_time - datetime.timedelta(seconds=10):
-                target_price = get_target_price(coin, 0.5)
-                current_price = get_current_price(coin)
-                if target_price < current_price:
-                    krw = get_balance("KRW")
-                    if krw > 5000:
-                        upbit.buy_market_order(coin, krw*0.9995)
-            else:
-                balances = upbit.get_balances()
-                for coin in balances[1:]:
-                    coin['currency'] = get_balance(coin['balance'])
-                    btc = get_balance(coin)
-                    if btc > 0.00008:
-                        upbit.sell_market_order("KRW-BTC", btc*0.9995)
-        time.sleep(1)
-    except Exception as e:
-        print(e)
-        time.sleep(1)
+# 자동매매 시작 왜 숫자로 변환이 안되는지 모르겠음!!!!
+for coin in balances[1:]:
+    money = float(coin['balance'])
+    if money > 0.00008:
+        upbit.sell_market_order("KRW-%s" %
+                                coin['currency'], coin['currency']*0.9995)
