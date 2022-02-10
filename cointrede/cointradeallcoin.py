@@ -10,7 +10,7 @@ maincoin = pyupbit.get_tickers(fiat='KRW')
 
 def get_target_price(ticker, k):
     """변동성 돌파 전략으로 매수 목표가 조회"""
-    df = pyupbit.get_ohlcv(ticker, interval="day", count=2)
+    df = pyupbit.get_ohlcv(ticker, interval="day", count=7)
     target_price = df.iloc[0]['close'] + \
         (df.iloc[0]['high'] - df.iloc[0]['low']) * k
     print(ticker, target_price)
