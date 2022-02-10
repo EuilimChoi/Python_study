@@ -59,7 +59,8 @@ while True:
                 if target_price < current_price:
                     krw = get_balance("KRW")
                     if krw > 5000:
-                        upbit.buy_market_order(coin, krw*0.9995)
+                        print(coin, '산다아아아아아아')
+                        #upbit.buy_market_order(coin, krw*0.9995)
             else:
                 balances = upbit.get_balances()
                 for coin in balances[1:]:
